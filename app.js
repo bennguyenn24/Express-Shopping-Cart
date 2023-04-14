@@ -26,61 +26,37 @@ app.patch("/items/:id", (req, res) => {
     const { id } = req.params;
     const { price, name } = req.body;
 
+    const updatedItems = items.map((item) =>
+        item.id == id ? { ...item, price, name } : item
+    );
 
-
-    res.json(updatedItem);
+    res.json(updatedItems);
 });
 
 app.delete("/items/:id", (req, res) => {
-    const { id } = req.params;
-
+    const newItemArr = items.filter((item) => item.id != id);
+    res.json(newItemArr);
 });
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);
 });
 
+// const updatedItems = items.map((item) => {
+//     // If this item is the one we want to change
+//     if (item.id == id) {
+//         // We will change it
+//         return { ...item, price, name };
+//         // Else return this item as is
+//     } else {
+//         return item;
+//     }
+// })
 
+// const updatedItem = updatedItems.filter((item) => item.id == id);
 
+// DELETE
 
+// const newArr = items.filter(item => item.id != id)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // const updatedItems = items.map((item) => {
-    //     // If this item is the one we want to change
-    //     if (item.id == id) {
-    //         // We will change it
-    //         return { ...item, price, name };
-    //         // Else return this item as is
-    //     } else {
-    //         return item;
-    //     }
-    // })
-
-    // const updatedItem = updatedItems.filter((item) => item.id == id);
-
-
-
-
-
-    // DELETE
-
-    // const newArr = items.filter(item => item.id != id)
-
-    // res.json(newArr);
+// res.json(newArr);
